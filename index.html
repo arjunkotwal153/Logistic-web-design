@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0b0c">
+  <title>Logistics that works as hard as you do</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@800&family=Public+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #141516;
+      --cream: #f7f5ef;
+      --paper: #e2dedd;
+      --u: min(100vh / 800, 100vw / 716);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: #0a0b0c;
+      scroll-behavior: auto;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background: #0a0b0c;
+      font-family: "Public Sans", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .track {
+      position: relative;
+      height: var(--track-height, 400vh);
+      background: #0a0b0c;
+    }
+
+    .scene {
+      position: sticky;
+      z-index: 0;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      height: 100lvh;
+      overflow: hidden;
+      background: #0a0b0c;
+    }
+
+    .scene video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .scene::after {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      content: "";
+      background: linear-gradient(180deg, rgb(0 0 0 / 12%), transparent 28%, transparent 72%, rgb(0 0 0 / 10%));
+    }
+
+    .content {
+      position: absolute;
+      z-index: 1;
+      inset: 0 0 auto;
+      height: 100%;
+      pointer-events: none;
+      color: #fff;
+      text-shadow: 0 2px 15px rgb(0 0 0 / 42%);
+    }
+
+    .intro {
+      position: absolute;
+      top: 117.5vh;
+      left: 50%;
+      width: 100%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: var(--cream);
+    }
+
+    .eyebrow {
+      margin: 0 0 calc(17 * var(--u));
+      font-size: calc(7.4 * var(--u));
+      font-weight: 700;
+      letter-spacing: .304em;
+      line-height: 1.2;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Exo 2", sans-serif;
+      font-size: calc(56 * var(--u));
+      font-weight: 800;
+      line-height: calc(62 * var(--u));
+      letter-spacing: -.025em;
+      text-shadow: 0 12px 32px rgb(0 0 0 / 50%);
+    }
+
+    h1 span { display: block; white-space: nowrap; }
+
+    .features {
+      position: absolute;
+      inset: 0;
+    }
+
+    .feature {
+      position: absolute;
+      width: calc(300 * var(--u));
+      color: #fff;
+    }
+
+    .feature:nth-child(1) { top: 187.5vh; left: calc(50% - 378 * var(--u)); text-align: right; }
+    .feature:nth-child(2) { top: 187.5vh; left: calc(50% + 78 * var(--u)); text-align: left; }
+    .feature:nth-child(3) { top: 219.875vh; left: calc(50% - 388 * var(--u)); text-align: right; }
+    .feature:nth-child(4) { top: 219.875vh; left: calc(50% + 88 * var(--u)); text-align: left; }
+    .feature:nth-child(5) { top: 257.875vh; left: 50%; text-align: center; transform: translateX(-50%); }
+
+    .feature-icon {
+      display: block;
+      width: calc(34 * var(--u));
+      height: calc(34 * var(--u));
+      margin-bottom: calc(30 * var(--u));
+      color: #fff;
+      filter: drop-shadow(0 4px 12px rgb(255 255 255 / 22%));
+      animation: icon-drift 4.2s ease-in-out infinite;
+    }
+
+    .feature:nth-child(2) .feature-icon { animation-delay: -.8s; }
+    .feature:nth-child(3) .feature-icon { animation-delay: -1.6s; }
+    .feature:nth-child(4) .feature-icon { animation-delay: -2.4s; }
+    .feature:nth-child(5) .feature-icon { animation-delay: -3.2s; }
+
+    @keyframes icon-drift {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .feature:nth-child(odd):not(:last-child) .feature-icon { margin-left: auto; }
+    .feature:nth-child(2) .feature-icon,
+    .feature:nth-child(4) .feature-icon { margin-right: auto; }
+    .feature:nth-child(5) .feature-icon { margin-right: auto; margin-left: auto; }
+
+    .feature h2 {
+      margin: 0 0 calc(12 * var(--u));
+      font-size: calc(19.6 * var(--u));
+      font-weight: 700;
+      line-height: calc(20 * var(--u));
+      text-transform: uppercase;
+    }
+
+    .feature p {
+      margin: 0;
+      color: rgb(255 255 255 / 88%);
+      font-size: calc(12.3 * var(--u));
+      font-weight: 400;
+      line-height: calc(15.4 * var(--u));
+    }
+
+    .trust {
+      position: relative;
+      z-index: 2;
+      margin-top: -34vh;
+      padding: 34vh 22px 0;
+      overflow: hidden;
+      color: var(--ink);
+      background: linear-gradient(180deg, transparent 0, var(--paper) 34vh);
+      text-shadow: none;
+    }
+
+    .trust-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-bottom: 140px;
+    }
+
+    .trust-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 48px;
+      align-items: end;
+      padding: 0 0 38px;
+      border-bottom: 1px solid rgb(20 21 22 / 16%);
+    }
+
+    .trust-title {
+      margin: 0;
+      font-size: clamp(34px, 4.4vw, 60px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -.045em;
+      text-transform: uppercase;
+    }
+
+    .trust-title span { display: block; }
+    .trust-title .muted { color: #8f8b8a; }
+
+    .trust-note {
+      max-width: 300px;
+      margin: 0 0 4px;
+      color: rgb(20 21 22 / 70%);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .quote {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 36px;
+      padding: 44px 0;
+      border-bottom: 1px solid rgb(20 21 22 / 16%);
+      transition: padding-left 220ms ease, border-color 220ms ease;
+    }
+
+    .quote:hover {
+      padding-left: 10px;
+      border-color: rgb(20 21 22 / 38%);
+    }
+
+    .quote-person { margin: 0; }
+    .quote-name {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    .quote-role {
+      display: block;
+      color: rgb(20 21 22 / 60%);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .quote blockquote {
+      max-width: 680px;
+      margin: 0;
+      font-size: clamp(17px, 1.6vw, 21px);
+      font-weight: 400;
+      line-height: 1.42;
+      letter-spacing: -.015em;
+    }
+
+    .credit {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 40px;
+      color: rgb(20 21 22 / 72%);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .credit strong {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 7px 10px;
+      border-radius: 2px;
+      color: #141516;
+      background: linear-gradient(110deg, #f7f5ef 0%, #fff8df 45%, #e9c977 100%);
+      box-shadow: 0 3px 16px rgb(134 101 34 / 22%);
+    }
+
+    .credit strong::after {
+      position: absolute;
+      z-index: 1;
+      inset: -50% auto -50% -40%;
+      width: 35%;
+      content: "";
+      background: rgb(255 255 255 / 68%);
+      filter: blur(7px);
+      transform: rotate(22deg);
+      animation: credit-shine 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes credit-shine {
+      0%, 24% { left: -40%; }
+      66%, 100% { left: 125%; }
+    }
+
+    @media (max-width: 609px), (orientation: portrait) {
+      :root { --u: min(100vw / 390, 1.6px); }
+
+      .scene video { object-position: center; }
+
+      .content { height: 100%; }
+
+      .intro {
+        top: 112vh;
+        width: calc(100% - 36px);
+      }
+
+      .eyebrow {
+        margin-bottom: 16px;
+        font-size: 10px;
+      }
+
+      h1 {
+        font-size: clamp(34px, 46 * var(--u), 72px);
+        line-height: 1.02;
+        letter-spacing: -.035em;
+      }
+
+      h1 span { white-space: normal; }
+
+      .features {
+        top: 160vh;
+        right: 22px;
+        bottom: auto;
+        left: 22px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16vh;
+      }
+
+      .feature,
+      .feature:nth-child(n) {
+        position: relative;
+        inset: auto;
+        width: min(100%, 350px);
+        text-align: center;
+        transform: none;
+      }
+
+      .feature-icon,
+      .feature:nth-child(n) .feature-icon {
+        width: 34px;
+        height: 34px;
+        margin: 0 auto 20px;
+      }
+
+      .feature h2 {
+        margin-bottom: 10px;
+        font-size: 17px;
+        line-height: 1.15;
+      }
+
+      .feature p {
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .trust {
+        margin-top: -20vh;
+        padding: 20vh 22px 0;
+        background: linear-gradient(180deg, transparent 0, var(--paper) 20vh);
+      }
+
+      .trust-inner { padding-bottom: 72px; }
+
+      .trust-header {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding-bottom: 26px;
+      }
+
+      .trust-title { font-size: clamp(34px, 10vw, 48px); }
+      .trust-note { max-width: 430px; font-size: 13px; }
+
+      .quote {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 28px 0;
+      }
+
+      .quote blockquote { font-size: 18px; }
+      .credit { flex-wrap: wrap; margin-top: 28px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .feature-icon,
+      .credit strong::after { animation: none; }
+      .quote { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="track" id="track">
+      <div class="scene" aria-hidden="true">
+        <video id="heroVideo" muted playsinline preload="auto"
+          poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/5e018553-cb8a-420a-819f-fcdfa08e5df0.jpg">
+          <source data-quality="720" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/e8eb434f-d097-4b1b-b9e6-c8b46fa43040.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="content">
+        <header class="intro">
+          <p class="eyebrow">WHY US</p>
+          <h1>
+            <span>LOGISTICS</span>
+            <span>THAT WORKS</span>
+            <span>AS HARD AS</span>
+            <span>YOU DO.</span>
+          </h1>
+        </header>
+
+        <div class="features">
+          <article class="feature">
+            <svg class="feature-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+              <circle cx="17" cy="17" r="15.2" stroke="currentColor" stroke-width="1.6" stroke-dasharray="1.5 3.2"/>
+              <circle cx="17" cy="17" r="8.2" fill="currentColor"/>
+              <path d="M8.8 17h16.4M17 8.8c2.2 2.2 3.3 4.9 3.3 8.2s-1.1 6-3.3 8.2c-2.2-2.2-3.3-4.9-3.3-8.2s1.1-6 3.3-8.2Z" stroke="#0a0b0c" stroke-width="1.1"/>
+            </svg>
+            <h2>One point of<br>contact</h2>
+            <p>No more chasing multiple vendors. One<br> team manages your entire end-to-end flow,<br> origin to destination.</p>
+          </article>
+          <article class="feature">
+            <svg class="feature-icon" viewBox="0 0 34 34" fill="currentColor" aria-hidden="true">
+              <path d="M3 19.5h8v8H3zM12.5 13h8v14.5h-8zM22 6.5h8v21h-8z"/>
+              <path d="M5 22h4M14.5 16h4M24 9.5h4" stroke="#0a0b0c" stroke-width="1"/>
+            </svg>
+            <h2>Full supply chain<br>visibility</h2>
+            <p>Track your freight in real time and get<br> proactive updates before issues become<br> delays.</p>
+          </article>
+          <article class="feature">
+            <svg class="feature-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+              <circle cx="17" cy="17" r="15.2" stroke="currentColor" stroke-width="1.6" stroke-dasharray="1.5 3.2"/>
+              <circle cx="17" cy="17" r="8.5" fill="currentColor"/>
+              <path d="m13.1 17.2 2.5 2.6 5.5-5.8" stroke="#0a0b0c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h2>Compliance you<br>can trust</h2>
+            <p>Licensed customs brokers keep your<br> shipments moving within every regulatory<br> requirement, border to border.</p>
+          </article>
+          <article class="feature">
+            <svg class="feature-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+              <path d="M22.2 5.2c-1.3-1-3.1-1.5-5.1-1.5-4.3 0-7.3 2.3-7.3 5.7 0 3.2 2.4 4.5 7.3 5.4 4.8.9 7.1 2.3 7.1 5.8 0 3.7-3.2 6.1-7.7 6.1-3 0-5.8-1-7.7-2.9M17 1.8v30.4" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
+            </svg>
+            <h2>Competitive,<br>transparent pricing</h2>
+            <p>No hidden fees. Clear, competitive pricing<br> backed by responsive sales support<br> throughout the shipment.</p>
+          </article>
+          <article class="feature">
+            <svg class="feature-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+              <path d="m5 10 7 7-7 7M15 10l7 7-7 7M25 10l5 7-5 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="square" stroke-linejoin="miter"/>
+            </svg>
+            <h2>Fast issue resolution</h2>
+            <p>When something unexpected happens, we<br> do not point fingers, we solve it. Our team<br> acts at once to protect your timeline.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <section class="trust" aria-labelledby="trust-title">
+      <div class="trust-inner">
+        <header class="trust-header">
+          <h2 class="trust-title" id="trust-title">
+            <span>TRUSTED</span>
+            <span>BY BUSINESSES</span>
+            <span class="muted">ACROSS THE REGION</span>
+          </h2>
+          <p class="trust-note">From first-time importers to high-volume shippers, our customers stay because every consignment is treated like it matters.</p>
+        </header>
+
+        <article class="quote">
+          <p class="quote-person"><span class="quote-name">Thomas Reid</span><span class="quote-role">Director, Harbour Fit Group</span></p>
+          <blockquote>“My business would not function without this team. They treat every consignment on its own merits, and our account managers know our business well enough to answer before we ask. We have never had that from a bigger carrier.”</blockquote>
+        </article>
+        <article class="quote">
+          <p class="quote-person"><span class="quote-name">Ana Park</span><span class="quote-role">Supply Chain Lead, Northline Projects</span></p>
+          <blockquote>“As a first-time shipper on a major infrastructure job, we were in unfamiliar territory. They planned the whole route with us, flagged every risk early, and our first delivery reached site on the day they promised.”</blockquote>
+        </article>
+        <article class="quote">
+          <p class="quote-person"><span class="quote-name">Liam Carter</span><span class="quote-role">Operations Manager, Coastline Foods</span></p>
+          <blockquote>“One contact, one dashboard, no surprises. When a vessel slipped two days, we heard about it before our customers did, and the new plan was already in place.”</blockquote>
+        </article>
+        <p class="credit">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="m7 1 1.4 4.6L13 7l-4.6 1.4L7 13 5.6 8.4 1 7l4.6-1.4L7 1Z" fill="currentColor"/>
+          </svg>
+          Made by <strong>Kamlesh Singh Kotwal</strong>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const track = document.getElementById("track");
+      const video = document.getElementById("heroVideo");
+      const featureFive = document.querySelector(".feature:nth-child(5)");
+      const isRecorder = new URLSearchParams(location.search).get("rec") === "1";
+      const prefers720 = window.matchMedia("(max-width: 900px)").matches ||
+        (navigator.connection && navigator.connection.saveData);
+      const sources = {
+        720: "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/e8eb434f-d097-4b1b-b9e6-c8b46fa43040.mp4",
+        1080: "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/e02bb27f-80d8-445f-a03e-1b609dac4261.mp4"
+      };
+      const source = document.createElement("source");
+      source.src = prefers720 ? sources[720] : sources[1080];
+      source.type = "video/mp4";
+      video.replaceChildren(source);
+
+      let end = 0;
+      let knee = 0;
+      let targetTime = 0;
+      let currentTime = 0;
+      let duration = 5.04;
+      let rafPending = false;
+      let recorderStart = 0;
+      let recorderScroll = 0;
+
+      const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+      function measure() {
+        const trackTop = track.getBoundingClientRect().top;
+        const lastBottom = featureFive.getBoundingClientRect().bottom - trackTop;
+        const viewport = window.innerHeight;
+        end = lastBottom + viewport * 0.75;
+        knee = lastBottom / end;
+        track.style.setProperty("--track-height", `${end + viewport}px`);
+        recorderScroll = end + viewport * 0.9;
+      }
+
+      function clipProgressFor(scrollOffset) {
+        const progress = clamp(scrollOffset / end, 0, 1);
+        return progress < knee
+          ? (progress / knee) * 0.46
+          : 0.46 + ((progress - knee) / (1 - knee)) * 0.54;
+      }
+
+      function cubicBezier(x, x1, y1, x2, y2) {
+        const curve = (t, a, b) => 3 * (1 - t) * (1 - t) * t * a + 3 * (1 - t) * t * t * b + t * t * t;
+        let low = 0;
+        let high = 1;
+        let t = x;
+        for (let i = 0; i < 12; i++) {
+          const currentX = curve(t, x1, x2);
+          if (Math.abs(currentX - x) < 0.00001) break;
+          if (currentX < x) low = t;
+          else high = t;
+          t = (low + high) / 2;
+        }
+        return curve(t, y1, y2);
+      }
+
+      function recorderProgress(t) {
+        const progress = clamp(t, 0, 1);
+        if (progress <= 0.08) return 0.03;
+        if (progress >= 0.92) return 0.94;
+        const phase = (progress - 0.08) / 0.84;
+        return 0.03 + cubicBezier(phase, 0.45, 0.05, 0.55, 0.95) * 0.91;
+      }
+
+      function recorderOffset(progress) {
+        return (progress / 0.94) * recorderScroll;
+      }
+
+      function scrollTarget() {
+        const rect = track.getBoundingClientRect();
+        return clamp(-rect.top, 0, end);
+      }
+
+      function setTargetFromScroll() {
+        targetTime = clipProgressFor(scrollTarget()) * (duration - 1 / 48);
+      }
+
+      function renderFrame() {
+        rafPending = false;
+        currentTime += (targetTime - currentTime) * 0.22;
+        if (video.readyState >= 2 && !video.seeking && Math.abs(video.currentTime - currentTime) > 1 / 60) {
+          video.currentTime = clamp(currentTime, 0, Math.max(0, duration - 1 / 48));
+        }
+        if (Math.abs(targetTime - currentTime) > 1 / 240) requestAnimationFrame(renderFrame);
+      }
+
+      function requestFrame() {
+        if (!rafPending) {
+          rafPending = true;
+          requestAnimationFrame(renderFrame);
+        }
+      }
+
+      video.addEventListener("loadedmetadata", () => {
+        duration = Number.isFinite(video.duration) ? video.duration : 5.04;
+        measure();
+        setTargetFromScroll();
+        currentTime = targetTime;
+        requestFrame();
+      });
+
+      video.addEventListener("seeked", () => {
+        if (Math.abs(targetTime - video.currentTime) > 1 / 60) requestFrame();
+      });
+
+      window.addEventListener("scroll", () => {
+        if (!isRecorder) {
+          setTargetFromScroll();
+          requestFrame();
+        }
+      }, { passive: true });
+
+      window.addEventListener("resize", () => {
+        measure();
+        if (!isRecorder) {
+          setTargetFromScroll();
+          requestFrame();
+        }
+      });
+
+      if (isRecorder) {
+        const startRecorder = (timestamp) => {
+          if (!recorderStart) recorderStart = timestamp;
+          const elapsed = timestamp - recorderStart;
+          const t = clamp(elapsed / 6500, 0, 1);
+          const progress = recorderProgress(t);
+          window.scrollTo(0, track.getBoundingClientRect().top + window.scrollY + recorderOffset(progress));
+          setTargetFromScroll();
+          requestFrame();
+          if (t < 1) requestAnimationFrame(startRecorder);
+        };
+        video.addEventListener("loadedmetadata", () => requestAnimationFrame(startRecorder), { once: true });
+        window.__recTime = (element, t) => {
+          const offset = recorderOffset(recorderProgress(t));
+          window.scrollTo(0, track.getBoundingClientRect().top + window.scrollY + offset);
+          const time = clipProgressFor(offset) * (duration - 1 / 48);
+          targetTime = time;
+          currentTime = time;
+          if (!element.seeking && element.readyState >= 2) element.currentTime = time;
+          return time;
+        };
+      }
+
+      measure();
+    })();
+  </script>
+</body>
+</html>
